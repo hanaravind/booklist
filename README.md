@@ -6,6 +6,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+## `After cloning the project`
+
+After cloning https://github.com/hanaravind/booklist.git go to the project by /cd booklist/
+and do [npm install] to install all packages from the package.json list and run the project
+
 ### `npm start`
 
 Runs the app in the development mode.\
