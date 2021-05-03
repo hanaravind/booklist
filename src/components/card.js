@@ -1,27 +1,28 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchBooks } from '../reducer/middleware'
+import { filterBook } from '../reducer/action'
 import Search from './search'
 
 function Card() {
-    const books = useSelector(state => {
+    let books = useSelector((state) => {
         return state.data
-    })    
-
-    const [list, setList] = useState(books)
-
-   
+    })   
+    
 
     const filterList = (name) => {
         if(name.trim() === '' || name === undefined) {
-            return setList(books)
+            console.log('empty string is', name, books)
+            return books
         } else {
-          const filtered = list.filter(data => {
-            if (data.volumeInfo.title.toLowerCase().includes(name.toLowerCase())) {
-              return data
-            }
-          })
-          setList(filtered)
+            // eslint-disable-next-line array-callback-return
+            const filtered = books.filter(data => {
+                if (data.volumeInfo.title.toLowerCase().includes(name.toLowerCase())) {
+                    return data
+                }
+            })
+                books = [...filtered]
+                console.log('not empty string is',books)
         }
     }
     const dispatch = useDispatch()
@@ -38,7 +39,7 @@ function Card() {
                     return (<div className="list-books-container" key={index}>
                     <ul className="list-card">
                         <li className="book-title">{book.volumeInfo.title}</li>
-                        <li className="book-author">Authors: {book.volumeInfo.authors[0]}</li>
+                        {book.volumeInfo.authors.map((author, i) => <li className="book-author" key={i}>Authors: {author}</li>)}
                         <li className="book-publisher">publisher: {book.volumeInfo.publisher}</li>
                         <li className="book-published-date">Published Date: {book.volumeInfo.publishedDate}</li>
                     </ul>

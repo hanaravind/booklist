@@ -1,4 +1,4 @@
-import { ADD_BOOK, LIST_BOOKS } from './constants'
+import { ADD_BOOK, LIST_BOOKS, FILTER_BOOK } from './constants'
 import { bookList } from './initialState'
 
 export const Reducer = (state = bookList, action) => {

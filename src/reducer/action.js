@@ -1,5 +1,5 @@
 
-import { ADD_BOOK, LIST_BOOKS } from './constants'
+import { ADD_BOOK, LIST_BOOKS, FILTER_BOOK } from './constants'
 
 
 export const listBooks = (payload) => {
@@ -12,6 +12,13 @@ export const listBooks = (payload) => {
 export const addBook = (payload) => {
     return {
         type: ADD_BOOK,
+        payload
+    }
+}
+
+export const filterBook = (payload) => {
+    return {
+        type: FILTER_BOOK,
         payload
     }
 }
