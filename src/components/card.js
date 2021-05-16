@@ -16,8 +16,8 @@ function Card() {
         if(name.trim() === '' || name === undefined) {
             return setList(books)
         } else {
-          const filtered = list.filter(data => {
-            if (data.volumeInfo.title.toLowerCase().includes(name.toLowerCase())) {
+          const filtered = books.filter(data => {
+            if (data.volumeInfo.title.toLowerCase().includes(name.toLowerCase()) || data.volumeInfo.authors[0].toLowerCase().includes(name.toLowerCase())) {
               return data
             }
           })
@@ -25,6 +25,9 @@ function Card() {
         }
     }
     const dispatch = useDispatch()
+    useEffect(() => {
+        setList(books)
+    }, [books])
     useEffect(() => {
         dispatch(fetchBooks())
     }, [])
@@ -34,7 +37,7 @@ function Card() {
              <Search filterChange={filterList}/>
              <h4>All Books</h4>
              <div className="list-card-container">
-                {books.map((book, index) => {
+                {list.map((book, index) => {
                     return (<div className="list-books-container" key={index}>
                     <ul className="list-card">
                         <li className="book-title">{book.volumeInfo.title}</li>
